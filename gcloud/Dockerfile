@@ -4,7 +4,7 @@ LABEL maintainer "Niko Virtala <niko@nikovirtala.io>"
 WORKDIR /root
 
 RUN apk add --no-cache --virtual .build-dependencies \
-  ca-certificates curl tar openssh-client \
+  ca-certificates curl tar openssh-client git \
   && curl -sSLO https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz \
   && tar -zxvf google-cloud-sdk.tar.gz \
   && rm -f google-cloud-sdk.tar.gz \
