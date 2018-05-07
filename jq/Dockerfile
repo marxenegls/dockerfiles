@@ -1,7 +1,10 @@
-FROM alpine:latest
+FROM alpine:edge
 LABEL maintainer "Niko Virtala <niko@nikovirtala.io>"
 
-WORKDIR /root
+RUN adduser -D -g '' -h /home/nikovirtala nikovirtala
+
+USER nikovirtala
+WORKDIR /home/nikovirtala
 
 RUN apk add --no-cache --virtual curl ca-certificates && \
   curl -sSLO https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
