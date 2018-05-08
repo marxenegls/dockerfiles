@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 LABEL maintainer "Niko Virtala <niko@nikovirtala.io>"
 
 RUN apk --no-cache add \
@@ -7,7 +7,12 @@ RUN apk --no-cache add \
   less \
   python \
   py2-pip \
-  && pip install awscli \
-  && mkdir -p /root/.aws
+  && pip install awscli
+
+RUN adduser -D -g '' -h /home/nikovirtala nikovirtala
+USER nikovirtala
+WORKDIR /home/nikovirtala
+
+RUN mkdir -p /home/nikovirtala/.aws
 
 ENTRYPOINT ["aws"]

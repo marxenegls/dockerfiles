@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 LABEL maintainer "Niko Virtala <niko@nikovirtala.io>"
 
 RUN apk add --no-cache python && \
@@ -8,5 +8,8 @@ RUN apk add --no-cache python && \
     rm -r /root/.cache && \
     pip install aws-shell
 
-ENTRYPOINT ["aws-shell"]
+RUN adduser -D -g '' -h /home/nikovirtala nikovirtala
+USER nikovirtala
+WORKDIR /home/nikovirtala
 
+ENTRYPOINT ["aws-shell"]
